@@ -12,17 +12,25 @@ filter.addEventListener('keyup', filterItems);
 function addItem(e){
   e.preventDefault();  
   var newItem = document.getElementById('item').value;
-  
+  var itemDesc = document.getElementById('desc').value;
 
+  
   var li = document.createElement('li');
   li.className = 'list-group-item';
-  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(newItem + " : " +itemDesc ));
+  
 
   var deleteBtn = document.createElement('button');
 
   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
   deleteBtn.appendChild(document.createTextNode('X'));
   li.appendChild(deleteBtn);
+
+  var editBtn = document.createElement('button');
+
+  editBtn.className = 'btn btn-primary btn-sm float-right edit';
+  editBtn.appendChild(document.createTextNode('EDIT'));
+  li.appendChild(editBtn);
   
   itemList.appendChild(li);
 }
@@ -46,11 +54,10 @@ function filterItems(e){
     
     Array.from(items).forEach(function(item){
       var itemName = item.firstChild.textContent;
-
+      
       if(itemName.toLowerCase().indexOf(text) != -1){
         item.style.display = 'block';
-      } 
-      else {
+      } else {
         item.style.display = 'none';
       }
     });
